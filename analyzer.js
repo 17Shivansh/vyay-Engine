@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         cardContainer.innerHTML = "";
         recipes.forEach(recipe => {
             const card = document.createElement("div");
+            console.log(recipe.url);
             card.classList.add("recipe-card", "border", "border-gray-300", "rounded-lg", "p-4", "mx-2", "my-2");
             card.innerHTML = `
                 <div class="meal-item rounded-lg overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center gap-x-10" style="width: 200px; height: 250px;">
@@ -57,17 +58,17 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <div class="meal-name font-semibold text-center">
                         <h3 class="py-2">${recipe.Recipe_title}</h3>
-                        <button class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-2 font-bold view-recipe-btn" data-recipe-id="${recipe.id}">View Recipe</button>
-                    </div>
-                </div>
-            `;
+                        <a href ="${recipe.url}" target="_blank" class="recipe-btn bg-[#ffc035] overflow-hidden flex-wrap text-white rounded-lg px-4 py-1 mt-2 font-bold view-recipe-btn">View Recipe</a>
+                        </div>
+                        </div>
+                        `;
             cardContainer.appendChild(card);
         });
         attachViewRecipeListeners(); // Attach event listeners to the "View Recipe" buttons
     }
 
     function attachViewRecipeListeners() {
-        const viewRecipeBtns = document.querySelectorAll(".view-recipe-btn");
+        const viewRecipeBtns = document.querySelectorAll(".recipe-btn");
         viewRecipeBtns.forEach(btn => {
             btn.addEventListener("click", function() {
                 const recipeId = btn.dataset.recipeId;

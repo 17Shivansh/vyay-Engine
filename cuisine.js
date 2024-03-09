@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <div class="meal-name font-semibold text-center">
                         <h3 class="py-2">${recipe.Recipe_title}</h3>
-                        <button class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-2 font-bold view-recipe-btn" data-recipe-id="${recipe.id}">View Recipe</button>
-                    </div>
+                        <a href ="${recipe.url}" target="_blank" class="recipe-btn bg-[#ffc035] text-white rounded-lg px-4 py-1 mt-2 font-bold view-recipe-btn">View Recipe</a>                    </div>
                 </div>
             `;
             cardContainer.appendChild(card);
