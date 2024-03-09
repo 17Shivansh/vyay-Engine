@@ -235,5 +235,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
+getMealListLatestRecipe();
 // for ends recipe start here 
