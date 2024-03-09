@@ -6,24 +6,18 @@ hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("-translate-x-full");
 });
 
-
 document.addEventListener("DOMContentLoaded", function() {
     const cardContainer = document.getElementById("card-Container");
     const recipeTableContainer = document.getElementById("recipeTableContainer");
     const searchBtn = document.getElementById("search-btn");
-   
 
     searchBtn.addEventListener("click", function() {
         const searchInputTxt = document.getElementById("search-input").value.trim();
         fetchRecipes(searchInputTxt);
     });
 
-    recipeAnalyzerBtn.addEventListener("click", function() {
-        fetchRecipeAnalyzerData();
-    });
-
     function fetchRecipes(searchInputTxt) {
-        const url = `https://apis-new.foodoscope.com/recipe-search/recipe?searchText=${searchInputTxt}&page=0&pageSize=10`;
+        const url = `https://apis-new.foodoscope.com/recipe-search/regions?searchText=${searchInputTxt}&pageSize=10`;
         const options = {
             method: 'GET',
             headers: {
@@ -75,56 +69,4 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
-
-    function fetchRecipeDetails(recipeId) {
-        const url = `https://apis-new.foodoscope.com/recipe/${recipeId}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'accept': 'application/json',
-                'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
-            },
-        };
-        fetch(url, options)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const recipeData = data.payload; // Assuming data contains the recipe details directly
-                    displayRecipeTable(recipeData);
-                } else {
-                    console.error("Failed to fetch recipe details");
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching recipe details:", error);
-            });
-    }
-    
-    function displayRecipeTable(recipeData) {
-        recipeTableContainer.innerHTML = `
-            <table class="table-auto border-collapse w-full">
-                <thead>
-                    <tr>
-                        <th class="border px-4 py-2">Recipe</th>
-                        <th class="border px-4 py-2">Carbohydrate</th>
-                        <th class="border px-4 py-2">Protein</th>
-                        <th class="border px-4 py-2">Fat</th>
-                        <th class="border px-4 py-2">Energy</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">${recipeData.Recipe_title}</td>
-                        <td class="border px-4 py-2">${recipeData.Carbohydrate}</td>
-                        <td class="border px-4 py-2">${recipeData.Protein}</td>
-                        <td class="border px-4 py-2">${recipeData.fat}</td>
-                        <td class="border px-4 py-2">${recipeData.Energy}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-    }
-    
-      
 });
-    

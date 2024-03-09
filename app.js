@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Fetch data from the API and create cards for recipe of the day
 function getMealData() {
   let searchInputTxt = document.getElementById("search-input").value.trim();
-  // console.log(searchInputTxt);
+
   const url = `https://apis-new.foodoscope.com/recipe/recipeOftheDay`;
   const options = {
     method: 'GET',
@@ -93,7 +93,7 @@ function getMealData() {
   };
   fetch(url, options)
   .then(response => {
-    console.log("API Response:", response); // Log the entire response
+    console.log("API Response:", response); 
     return response.json();
   })
       .then((data) => {
@@ -125,65 +125,115 @@ getMealData();
 
 
 // for latest recipe start here 
-function getMealListLatestRecipe() {
-  let searchInputTxt = document.getElementById("search-input").value.trim();
-  console.log(searchInputTxt);
-  const url = `https://apis-new.foodoscope.com/recipe-search/recipe?page=0&pageSize=15`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'accept': 'application/json',
-      'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
-    },
-  };
-  fetch(url, options)
-  .then(response => {
-    console.log("API Response 2:", response); // Log the entire response
-    return response.json();
-  })
-  .then((data) => {
-      let html = "";
-      // console.log("data" + data);
-      console.log("data2" + data);
-      console.log(data.payload.data[0].Recipe_title);
-      console.log(data.payload.data[0].img_url);
-      
-      if (data && data.success === "true") {
-        meal.innerHTML =
-          `<h2 class="title text-center font-bold">Your Search Results :</h2>`;
-        data.payload.data.forEach((recipe) => {
-          html += `
-            <div class="swiper-slide overflow-hidden w-[400px] sm:w-[300px] h-[400px]">
-              <div class="meal-item rounded-lg card w-full overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center h-75" data-id="${recipe.Recipe_id}">
-                <div class="meal-img">
-                  <img src="${recipe.img_url}" alt="food" class="w-full h-32 sm:h-48 rounded-lg object-cover">
-                </div>
-                <div class="meal-name font-semibold">
-                  <h3 class="py-2 text-center text-wrap">${recipe.Recipe_title}</h3>
-                  <a href="${recipe.url}" class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-5 font-bold mx-auto">View Recipe</a>
-                </div>
-              </div>
-            </div>`;
-        });
-        mealList.classList.remove("notFound");
-      } else {
-        html = "Sorry, we didn't find any meal!";
-        mealList.classList.add("notFound");
-      }
-    
+document.addEventListener("DOMContentLoaded", function() {
+  const recipeCardsContainer = document.getElementById("recipeCardsContainer");
 
-      document.getElementById("firstPage").innerHTML = (data.payload.data[1].Recipe_title);
+  fetchRecipes();
 
-      mealList.innerHTML = html;
+  function fetchRecipes() {
+    const url = "https://apis-new.foodoscope.com/recipe-search/recipe?searchText=&page=0&pageSize=3"; // Limiting to 3 recipes
+    const options = {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
+      },
+    };
 
-      // Initialize Swiper after adding cards
-      new Swiper('.swiper-container', {
-        // Optional Swiper options
-        slidesPerView: 'auto', // Display as many slides as possible within the container
-        spaceBetween: 16, // Adjust this value for spacing between slides
+    fetch(url, options)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          generateRecipeCards(data.payload.data);
+        } else {
+          console.error("Failed to fetch recipe data");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching recipe data:", error);
       });
+  }
+
+  function generateRecipeCards(recipes) {
+    recipeCardsContainer.innerHTML = "";
+    recipes.forEach(recipe => {
+      const card = document.createElement("div");
+      card.classList.add("card", "hover:shadow-lg");
+      card.innerHTML = `
+      <a href="#">
+        <img src="${recipe.img_url}" alt="${recipe.Recipe_title}" class="w-full h-32 sm:h-48 object-cover" />
+        <div class="m-4">
+          <span class="font-bold">${recipe.Recipe_title}</span>
+          <span class="block text-gray-500 text-sm">${recipe.Sub_region}</span>
+        </div>
+        <div class="badge">
+          <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>${recipe.cook_time} mins</span>
+        </div> </a>
+            `;
+      recipeCardsContainer.appendChild(card);
     });
-}
+  }
+});
+
+
+// for Recommedation recipe start here 
+document.addEventListener("DOMContentLoaded", function() {
+  const recipeCardsContainer = document.getElementById("recipe-Cards-Container");
+
+  fetchRecipes();
+
+  function fetchRecipes() {
+    const url = "https://apis-new.foodoscope.com/recipe-search/recipe?searchText=&page=4&pageSize=3"; 
+    const options = {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
+      },
+    };
+
+    fetch(url, options)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          generateRecipeCards(data.payload.data);
+        } else {
+          console.error("Failed to fetch recipe data");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching recipe data:", error);
+      });
+  }
+
+  function generateRecipeCards(recipes) {
+    recipeCardsContainer.innerHTML = "";
+    recipes.forEach(recipe => {
+      const card = document.createElement("div");
+      card.classList.add("card", "hover:shadow-lg");
+      card.innerHTML = `
+      <a href="#">
+        <img src="${recipe.img_url}" alt="${recipe.Recipe_title}" class="w-full h-32 sm:h-48 object-cover" />
+        <div class="m-4">
+          <span class="font-bold">${recipe.Recipe_title}</span>
+          <span class="block text-gray-500 text-sm">${recipe.Sub_region}</span>
+        </div>
+        <div class="badge">
+          <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>${recipe.cook_time} mins</span>
+        </div> </a>
+            `;
+      recipeCardsContainer.appendChild(card);
+    });
+  }
+});
+
+
 
 
 // for ends recipe start here 

@@ -40,7 +40,7 @@
           id="hamburger"
         >
           &#9776;
-        </div>https://images.media-allrecipes.com/userphotos/560x315/1607995.jpg
+      </div>
 
         <ul
           class="flex flex-col gap-5 min-h-screen fixed bg-black top-0 left-0 p-10 -translate-x-full transition-all font-bold"
@@ -82,7 +82,7 @@
   <div class="w-full overflow-hidden">
       <div class="flex justify-center items-center" id="cardContainer"></div>
   </div>
-</div>
+
  
     <h4 class="font-bold mt-2 pb-2 border-b border-gray-200">
      Recipe of the day
@@ -95,48 +95,12 @@
   <h4 class="font-bold  border-b pb-2 border-gray-200">
     Latest Recipes
   </h4>
-  <div class="mt-8 grid lg:grid-cols-3 gap-10">
-    <div class="card hover:shadow-lg">
-      <img src="https://i.ibb.co/tpCdNcX/stew.jpg" alt="stew" class="w-full h-32 sm:h-48 object-cover" />
-      <div class="m-4">
-        <span class="font-bold">5 Bean Chilli Stew</span>
-        <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-      </div>
-      <div class="badge">
-        <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>25 mins</span>
-      </div>
-    </div>
-    <div class="card hover:shadow-lg">
-      <img src="https://i.ibb.co/b1DQyfG/noodles.jpg" alt="noodles" class="w-full h-32 sm:h-48 object-cover" />
-      <div class="m-4">
-        <span class="font-bold">Veg Noodles</span>
-        <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-      </div>
-      <div class="badge">
-        <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>15 mins</span>
-      </div>
-    </div>
-    <div class="card hover:shadow-lg">
-      <img src="https://i.ibb.co/ZdP6cKQ/curry.jpg" alt="curry" class="w-full h-32 sm:h-48 object-cover" />
-      <div class="m-4">
-        <span class="font-bold">Tofu Curry</span>
-        <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-      </div>
-      <div class="badge">
-        <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>30 mins</span>
-      </div>
-    </div>
-
+  
+  <div class="mt-8 grid lg:grid-cols-3 gap-10" id="recipeCardsContainer">
+    <!-- Recipe cards will be dynamically generated here -->
   </div>
+  
+
   </div>
 
 
@@ -145,51 +109,15 @@
 <!-- for Recommended card start here -->
 
 <div class="">
-  <h4 class="font-bold mt-12 pb-2 border-b border-gray-200">
+  <h4 class="font-bold  border-b pb-2 border-gray-200">
     Recommended
   </h4>
-  <div class="mt-8 grid lg:grid-cols-3 gap-10">
-    <div class="card hover:shadow-lg">
-      <img src="https://d1uz88p17r663j.cloudfront.net/resized/cdeeaa75dc7cbcda31d1b1349edc9d03_Paneer_Kohlapuri_-_Plating_944_531.jpg" alt="stew" class="w-full h-32 sm:h-48 object-cover" />
-      <div class="m-4">
-        <span class="font-bold">5 Bean Chilli Stew</span>
-        <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-      </div>
-      <div class="badge">
-        <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>25 mins</span>
-      </div>
-    </div>
-    <div class="card hover:shadow-lg">
-      <img src="https://th.bing.com/th/id/OIP.NhmLfXVmCezaEzn5BNjnpAHaGQ?w=238&h=201&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="noodles" class="w-full h-32 sm:h-48 object-cover" />
-      <div class="m-4">
-        <span class="font-bold">Veg Noodles</span>
-        <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-      </div>
-      <div class="badge">
-        <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>15 mins</span>
-      </div>
-    </div>
-    <div class="card hover:shadow-lg">
-      <img src="https://th.bing.com/th/id/OIP.w1o1oS4q1O-U9Ty3O6RLvwHaEH?w=285&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="curry" class="w-full h-32 sm:h-48 object-cover" />
-      <div class="m-4">
-        <span class="font-bold">Tofu Curry</span>
-        <span class="block text-gray-500 text-sm">Recipe by Mario</span>
-      </div>
-      <div class="badge">
-        <svg class="w-5 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>30 mins</span>
-      </div>
-    </div>
-
+  
+  <div class="mt-8 grid lg:grid-cols-3 gap-10" id="recipe-Cards-Container">
+    <!-- Recipe cards will be dynamically generated here -->
   </div>
+  
+
   </div>
 
 
@@ -198,25 +126,25 @@
     <div class="w-full md:w-1/2 mb-6 md:mb-0 md:mr-2">
         <h4 class="font-bold mt-12 pb-2 border-b border-gray-200">Recipe Analyzer</h4>
         <a href="/analyzer.html">
-        <div class="rounded-lg overflow-hidden">
+        <div class="rounded-lg overflow-hidden  bg-gray-400 ">
           
             <img class="w-full h-full object-cover" src="./img/improve_nutri_content-1024x1024.jpg" alt="Image 1"> 
         </div>
       </a>
-    </div>
+    </div> 
    
     <div class="w-full md:w-1/2">
 
         <h4 class="font-bold mt-12 pb-2 border-b border-gray-200">Cuisine Explorer</h4>
         <a href="/cuisine.html">
         <div class="rounded-lg overflow-hidden">
-            <img class="w-full h-full object-cover" src="./img/pexels-pixabay-373290.jpg" alt="Image 2">
+            <img class="w-full h-full object-cover" src="./img\source.gif" alt="Image 2">
         </div></a>
     </div>
 </div>
 
 
-
+</div>
 
 <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
 <script src="https://mediafiles.botpress.cloud/e957f677-ca80-4e4b-aa87-73c97e3d22e8/webchat/config.js" defer></script>
