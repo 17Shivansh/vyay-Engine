@@ -13,22 +13,34 @@ hamburger.addEventListener("click", () => {
 // Search-bar start here
 function getMealList() {
   let searchInputTxt = document.getElementById("search-input").value.trim();
-  fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInputTxt}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
+  const url = `https://apis-new.foodoscope.com/recipe-search/recipe?searchText=${searchInputTxt}&page=0&pageSize=10`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json',
+      'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
+    },
+  };
+  fetch(url, options)
+  .then(response => {
+    console.log("API Response:", response); // Log the entire response
+    return response.json();
+  })
+  .then((data) => {
       let html = "";
-      const cardContainer = document.getElementById("cardContainer");
-      if (data.meals) {
-        data.meals.forEach((meal) => {
+      // console.log("data" + data);
+      console.log(data);
+      console.log(data.payload.data[0].Recipe_title);
+      console.log(data.payload.data[0].img_url);
+      if (data && data.success === "true") {
+        data.meals.forEach((recipe) => {
           html += `
               <div class="meal-item rounded-lg overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center gap-x-10" style="width: 100px; height: 100px;">
                 <div class="meal-img">
-                  <img src="${meal.strMealThumb}" alt="food" class="w-full h-full rounded-lg object-cover">
+                  <img src="${recipe.img_url}" alt="food" class="w-full h-full rounded-lg object-cover">
                 </div>
                 <div class="meal-name font-semibold">
-                  <h3 class="py-2 text-center text-wrap">${meal.strMeal}</h3>
+                  <h3 class="py-2 text-center text-wrap">${recipe.Recipe_title}</h3>
                   <a href="#" class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-5 font-bold mx-auto">View Recipe</a>
                 </div>
               </div>
