@@ -59,7 +59,7 @@ document.getElementById("search-btn").addEventListener("click", getMealList);
 // Fetch data from the API and create cards for recipe of the day
 function getMealData() {
   let searchInputTxt = document.getElementById("search-input").value.trim();
-  console.log(searchInputTxt);
+  // console.log(searchInputTxt);
   const url = `https://apis-new.foodoscope.com/recipe/recipeOftheDay`;
   const options = {
     method: 'GET',
@@ -82,14 +82,14 @@ function getMealData() {
           // const cookTime = meal.strMeasure2 + " " + meal.strIngredient2;
           cardContainer.innerHTML = `
           
-              <a href="another-page.html">
-  <div class="w-full h-[400px] my-2 flex flex-col md:flex-row justify-between items-center">
-    <div class="lg:w-[70%] w-full h-[200px] lg:h-[400px] bg-cover bg-center rounded-lg" style="background-image: url(${data.payload.img_url})"></div>
-    <div class="flex flex-col items-center mx-auto w-[30%] h-[400px]">
+          <a href="another-page.html" class="block w-full h-[400px] my-2 flex flex-col md:flex-row justify-between items-center">
+          <div class="lg:w-[70%] w-full h-[200px] lg:h-[400px] bg-cover bg-center rounded-lg"  style="background-image: url(${data.payload.img_url})"></div>
+    <div class="flex flex-col items-center mx-auto w-[30%] h-[400px] justify-center">
+    <h1 class="text-4xl font-bold mb-2 text-center">${data.payload.Recipe_title}</h1>
       <p class="text-base mb-2 font-semibold text-center">Prep Time: ${data.payload.prep_time}</p>
       <p class="text-base mb-2 text-center font-semibold">Cook Time: ${data.payload.cook_time}</p>
     </div>
-  </div>
+ 
 </a>
 
           `;
