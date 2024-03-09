@@ -27,40 +27,43 @@ function getMealList() {
     return response.json();
   })
   .then((data) => {
-      let html = "";
-      // console.log("data" + data);
-      console.log(data);
-      console.log(data.payload.data[0].Recipe_title);
-      console.log(data.payload.data[0].img_url);
-      if (data && data.success === "true") {
-        data.meals.forEach((recipe) => {
+    let html = "";
+    console.log(data);
+    if (data.success === true) {
+      if (data.payload.data.length > 0) {
+        data.payload.data.forEach((recipe) => { 
           html += `
-              <div class="meal-item rounded-lg overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center gap-x-10" style="width: 100px; height: 100px;">
-                <div class="meal-img">
-                  <img src="${recipe.img_url}" alt="food" class="w-full h-full rounded-lg object-cover">
-                </div>
-                <div class="meal-name font-semibold">
-                  <h3 class="py-2 text-center text-wrap">${recipe.Recipe_title}</h3>
-                  <a href="#" class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-5 font-bold mx-auto">View Recipe</a>
-                </div>
+            <div class="meal-item rounded-lg overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center gap-x-10" style="width: 100px; height: 100px;">
+              <div class="meal-img">
+                <img src="${recipe.img_url}" alt="food" class="w-full h-full rounded-lg object-cover">
               </div>
-            `;
+              <div class="meal-name font-semibold">
+                <h3 class="py-2 text-center">${recipe.Recipe_title}</h3> <!-- Removed text-wrap class -->
+                <a href="#" class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-5 font-bold mx-auto">View Recipe</a>
+              </div>
+            </div>
+          `;
         });
-        cardContainer.innerHTML = html;
+        document.getElementById("cardContainer").innerHTML = html;
 
         // Auto slider
         let currentIndex = 0;
         setInterval(() => {
           currentIndex++;
-          if (currentIndex >= cardContainer.children.length) {
+          if (currentIndex >= document.getElementById("cardContainer").children.length) {
             currentIndex = 0;
           }
-          cardContainer.style.transform = `translateX(-${currentIndex * 75}px)`;
+          document.getElementById("cardContainer").style.transform = `translateX(-${currentIndex * 75}px)`;
         }, 3000); // Change slide every 3 seconds (3000 milliseconds)
       } else {
-        cardContainer.innerHTML = "Sorry, we didn't find any meal!";
+        document.getElementById("cardContainer").innerHTML = "Sorry, we didn't find any meal!";
       }
-    });
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+    document.getElementById("cardContainer").innerHTML = "Error fetching data. Please try again later.";
+  });
 }
 
 // Add event listener to search button
@@ -90,16 +93,15 @@ function getMealData() {
 
           const meal = data.payload.Recipe_title;
           const cardContainer = document.getElementById("card-Container");
-          // const prepTime = meal.strMeasure1 + " " + meal.strIngredient1;
-          // const cookTime = meal.strMeasure2 + " " + meal.strIngredient2;
+ 
           cardContainer.innerHTML = `
           
           <a href="another-page.html" class="block w-full h-[400px] my-2 flex flex-col md:flex-row justify-between items-center">
           <div class="lg:w-[70%] w-full h-[200px] lg:h-[400px] bg-cover bg-center rounded-lg"  style="background-image: url(${data.payload.img_url})"></div>
     <div class="flex flex-col items-center mx-auto w-[30%] h-[400px] justify-center">
     <h1 class="text-4xl font-bold mb-2 text-center">${data.payload.Recipe_title}</h1>
-      <p class="text-base mb-2 font-semibold text-center">Prep Time: ${data.payload.prep_time}</p>
-      <p class="text-base mb-2 text-center font-semibold">Cook Time: ${data.payload.cook_time}</p>
+      <p class="text-base mb-2 font-semibold text-center text-nowrap">Prep Time: ${data.payload.prep_time}</p>
+      <p class="text-base mb-2 text-center font-semibold text-nowrap">Cook Time: ${data.payload.cook_time}</p>
     </div>
  
 </a>
