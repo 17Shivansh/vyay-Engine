@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Nav-bar -->
+    <nav
+      class="container flex justify-between bg-black text-white h-[54px] items-center px-3 lg:px-5 min-w-full"
+    >
+      <h1
+        class="lg:w-40 cursor-pointer w-20 text-nowrap text-yellow-300 lg:font-extrabold"
+      >
+      व्य-Engine
+      </h1>
+      <div class="lg:flex items-center hidden">
+        <ul class="text-white text-center flex-1">
+          <li class="px-5 inline-block"><a href="#" class="px-2">Home</a></li>
+          <li class="px-5 inline-block"><a href="#" class="px-2">About</a></li>
+          <li class="px-5 inline-block">
+            <a href="#" class="px-2">Features</a>
+          </li>
+          <li class="px-5 inline-block">
+            <a href="#" class="px-2">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- MObile Nav-bar -->
+      <div class="lg:hidden flex justify-between">
+        <div
+          class="text-2xl text-white font-bold cursor-pointer"
+          id="hamburger"
+        >
+          &#9776;
+        </div>
+
+        <ul
+          class="flex flex-col gap-5 min-h-screen fixed bg-black top-0 left-0 p-10 -translate-x-full transition-all font-bold"
+          id="mobile-nav"
+        >
+          <li class="px-5 inline-block"><a href="#" class="px-2">Home</a></li>
+          <li class="px-5 inline-block"><a href="#" class="px-2">About</a></li>
+          <li class="px-5 inline-block">
+            <a href="#" class="px-2">Features</a>
+          </li>
+          <li class="px-5 inline-block">
+            <a href="#" class="px-2">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Nav-bar ends here -->
+
+ <!-- search-bar starts here -->
+
+    <div class="w-[95%] mx-auto rounded-lg">
+    <div class="container my-5 bg-[#ffc035] mx-auto px-2 rounded-lg md:py-5">
+        <div class="meal-wrapper max-w-full p-2 text-center">
+          <div class="meal-search mx-4">
+            <h2 class="title font-extrabold lg:text-4xl">Find Meals For Your Ingredients!!</h2>
+      
+            <blockquote class="font-serif mt-2">"Real food doesn't have ingredients, real food is ingredients."<br>
+              <cite class="font-semibold">- Jamie Oliver</cite>
+            </blockquote>
+      
+            <div class="meal-search-box flex flex-col md:flex-row items-center justify-center text-center">
+              <input type="text" class="search-control md:w-1/2 lg:w-2/3 border border-black rounded-lg px-3 py-1 mb-2 md:mb-0" placeholder="Enter an ingredient" id="search-input">
+              <button type="submit" class="search-btn btn bg-black hover:bg-gray-600 text-white rounded-lg px-4 py-1 md:ml-2" id="search-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>    
+        </div>
+    </div>
+
+    <div class="w-full flex justify-center items-center" id="card-Container"></div>
+
+    </div>
+</body>
+</html>
