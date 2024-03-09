@@ -11,63 +11,71 @@ hamburger.addEventListener("click", () => {
 // Fetch data from the API and create cards
 
 // Search-bar start here
-function getMealList() {
-  let searchInputTxt = document.getElementById("search-input").value.trim();
-  const url = `https://apis-new.foodoscope.com/recipe-search/recipe?searchText=${searchInputTxt}&page=0&pageSize=10`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'accept': 'application/json',
-      'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
-    },
-  };
-  fetch(url, options)
-  .then(response => {
-    console.log("API Response:", response); // Log the entire response
-    return response.json();
-  })
-  .then((data) => {
-    let html = "";
-    console.log(data);
-    if (data.success === true) {
-      if (data.payload.data.length > 0) {
-        data.payload.data.forEach((recipe) => { 
-          html += `
-            <div class="meal-item rounded-lg overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center gap-x-10" style="width: 100px; height: 100px;">
-              <div class="meal-img">
-                <img src="${recipe.img_url}" alt="food" class="w-full h-full rounded-lg object-cover">
-              </div>
-              <div class="meal-name font-semibold">
-                <h3 class="py-2 text-center">${recipe.Recipe_title}</h3> <!-- Removed text-wrap class -->
-                <a href="#" class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-5 font-bold mx-auto">View Recipe</a>
-              </div>
-            </div>
-          `;
-        });
-        document.getElementById("cardContainer").innerHTML = html;
+document.addEventListener("DOMContentLoaded", function() {
+  const cardContainer = document.getElementById("card-Container");
+  const recipeTableContainer = document.getElementById("recipeTableContainer");
+  const searchBtn = document.getElementById("search-btn");
 
-        // Auto slider
-        let currentIndex = 0;
-        setInterval(() => {
-          currentIndex++;
-          if (currentIndex >= document.getElementById("cardContainer").children.length) {
-            currentIndex = 0;
-          }
-          document.getElementById("cardContainer").style.transform = `translateX(-${currentIndex * 75}px)`;
-        }, 3000); // Change slide every 3 seconds (3000 milliseconds)
-      } else {
-        document.getElementById("cardContainer").innerHTML = "Sorry, we didn't find any meal!";
-      }
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-    document.getElementById("cardContainer").innerHTML = "Error fetching data. Please try again later.";
+  searchBtn.addEventListener("click", function() {
+      const searchInputTxt = document.getElementById("search-input").value.trim();
+      fetchRecipes(searchInputTxt);
   });
-}
 
-// Add event listener to search button
-document.getElementById("search-btn").addEventListener("click", getMealList);
+  function fetchRecipes(searchInputTxt) {
+      const url = `https://apis-new.foodoscope.com/recipe-search/recipe?searchText=${searchInputTxt}&page=0&pageSize=10`;
+      const options = {
+          method: 'GET',
+          headers: {
+              'accept': 'application/json',
+              'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
+          },
+      };
+      fetch(url, options)
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  generateRecipeCards(data.payload.data);
+              } else {
+                  console.error("Failed to fetch recipe data");
+              }
+          })
+          .catch(error => {
+              console.error("Error fetching recipe data:", error);
+          });
+  }
+
+  function generateRecipeCards(recipes) {
+      cardContainer.innerHTML = "";
+      recipes.forEach(recipe => {
+          const card = document.createElement("div");
+          card.classList.add("recipe-card", "border", "border-gray-300", "rounded-lg", "p-4", "mx-2", "my-2");
+          card.innerHTML = `
+              <div class="meal-item rounded-lg overflow-hidden shadow-lg cursor-pointer my-4 p-2 flex flex-col items-center justify-center gap-x-10" style="width: 200px; height: 250px;">
+                  <div class="meal-img w-full h-3/4">
+                      <img src="${recipe.img_url}" alt="food" class="w-full h-full rounded-lg object-cover">
+                  </div>
+                  <div class="meal-name font-semibold text-center">
+                      <h3 class="py-2">${recipe.Recipe_title}</h3>
+                      <button class="recipe-btn bg-pink-600 text-white rounded-lg px-4 py-1 mt-2 font-bold view-recipe-btn" data-recipe-id="${recipe.id}">View Recipe</button>
+                  </div>
+              </div>
+          `;
+          cardContainer.appendChild(card);
+      });
+      attachViewRecipeListeners(); // Attach event listeners to the "View Recipe" buttons
+  }
+
+  function attachViewRecipeListeners() {
+      const viewRecipeBtns = document.querySelectorAll(".view-recipe-btn");
+      viewRecipeBtns.forEach(btn => {
+          btn.addEventListener("click", function() {
+              const recipeId = btn.dataset.recipeId;
+              fetchRecipeDetails(recipeId);
+          });
+      });
+  }
+});
+
 
 // Search-bar ends here
 

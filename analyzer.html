@@ -61,29 +61,37 @@
     <!-- Nav-bar ends here -->
 
  <!-- search-bar starts here -->
+ <div class="w-[95%] mx-auto rounded-lg">
+  <div class="container my-5 bg-[#ffc035] mx-auto px-2 rounded-lg md:py-5">
+      <div class="meal-wrapper max-w-full p-2 text-center">
+        <div class="meal-search mx-4">
+          <h2 class="title font-extrabold lg:text-4xl">Find Meals For Your Ingredients!!</h2>
+    
+          <blockquote class="font-serif mt-2">"Real food doesn't have ingredients, real food is ingredients."<br>
+            <cite class="font-semibold">- Jamie Oliver</cite>
+          </blockquote>
+    
+          <div class="meal-search-box flex flex-col md:flex-row items-center justify-center text-center">
+            <input type="text" class="search-control md:w-1/2 lg:w-2/3 border border-black rounded-lg px-3 py-1 mb-2 md:mb-0" placeholder="Enter an ingredient" id="search-input">
+            <button type="submit" class="search-btn btn bg-black hover:bg-gray-600 text-white rounded-lg px-4 py-1 md:ml-2" id="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>    
+      </div>
+  </div>
 
-    <div class="w-[95%] mx-auto rounded-lg">
-    <div class="container my-5 bg-[#ffc035] mx-auto px-2 rounded-lg md:py-5">
-        <div class="meal-wrapper max-w-full p-2 text-center">
-          <div class="meal-search mx-4">
-            <h2 class="title font-extrabold lg:text-4xl">Find Meals For Your Ingredients!!</h2>
-      
-            <blockquote class="font-serif mt-2">"Real food doesn't have ingredients, real food is ingredients."<br>
-              <cite class="font-semibold">- Jamie Oliver</cite>
-            </blockquote>
-      
-            <div class="meal-search-box flex flex-col md:flex-row items-center justify-center text-center">
-              <input type="text" class="search-control md:w-1/2 lg:w-2/3 border border-black rounded-lg px-3 py-1 mb-2 md:mb-0" placeholder="Enter an ingredient" id="search-input">
-              <button type="submit" class="search-btn btn bg-black hover:bg-gray-600 text-white rounded-lg px-4 py-1 md:ml-2" id="search-btn">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>    
-        </div>
+  <div class="w-full flex justify-center items-center" id="card-Container"></div>
+
+  <div class="w-full overflow-x-auto" id="recipeTableContainer"></div>
+</div>
+
+
+
+
+    
     </div>
 
-    <div class="w-full flex justify-center items-center" id="card-Container"></div>
-
-    </div>
+    <script src="./analyzer.js"></script>
 </body>
 </html>
