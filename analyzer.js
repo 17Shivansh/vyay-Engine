@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
             method: 'GET',
             headers: {
                 'accept': 'application/json',
-                'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
+                'Authorization': 'Bearer O_quZH8YU-oFK-DhrqqEP1JiXXCS7rZpiTHTFCRqeGm_C9dD',
             },
         };
         fetch(url, options)
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
             method: 'GET',
             headers: {
                 'accept': 'application/json',
-                'Authorization': 'Bearer D0atXz7kqK9N3O5LlQYLTZBm1BGcPNWRT0oZhx-TDkOQHNnQ',
+                'Authorization': 'Bearer O_quZH8YU-oFK-DhrqqEP1JiXXCS7rZpiTHTFCRqeGm_C9dD',
             },
         };
         fetch(url, options)
